@@ -1,6 +1,7 @@
 import React, {useRef} from 'react'
 import { useForm } from 'react-hook-form'
 import '../styles/forms.css'
+import $ from 'jquery'
 
 function SignUpPage() {
 
@@ -8,7 +9,15 @@ function SignUpPage() {
     const password = useRef({});
     password.current = watch("password", "");
     const onSubmit = data => {
-        alert(JSON.stringify(data))
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8080/api/users",
+            data: data,
+            success: function(res) {
+                console.log('joão')
+                console.log(res)
+            }
+          });
     }
 
     return (
