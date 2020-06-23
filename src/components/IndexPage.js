@@ -1,9 +1,9 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import '../styles/index.css'
 
 function IndexPage() {
 
-    return <h1>Welcom to Wall App</h1>
+    return <h1>Welcome to Wall App</h1>
 }
 
 export default IndexPage

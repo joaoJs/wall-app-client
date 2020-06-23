@@ -1,0 +1,22 @@
+.navBar {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.navBar > a {
+    text-decoration: none;
+    color: rgb(120,125,255);
+}
+
+.navBar > a:hover {
+    color: rgb(100,105,200);
+    font-weight: 400;
+}
+
+.navBar > a:nth-child(1) {
+    margin-right: 8px;
+} 
+
+.navBar > a:nth-child(3) {
+    margin-left: 8px;
+} 
