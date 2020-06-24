@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useForm } from 'react-hook-form'
 import '../styles/forms.css'
 import $ from 'jquery' 
 import {encryptPassword} from '../utils/password'
+import SessionContext from '../constants/context'
 
 function LoginPage() {
+    const { setSession } = useContext(SessionContext)
 
     const { register, errors, handleSubmit } = useForm()
     const onSubmit = data => {
@@ -15,7 +17,10 @@ function LoginPage() {
         url: `http://localhost:8080/api/users/login`,
         data: data,
         success: function(res) {
-            console.log('joão')
+            const newSession = {isLoggedIn: true}
+            setSession(newSession)
+            console.log('====SESSION')
+            console.log(newSession)
             console.log(res)
         }
       });

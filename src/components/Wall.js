@@ -8,20 +8,22 @@ class Wall extends React.Component {
         this.state = {
             error: null,
             isLoaded: false,
-            messages: [{title: 'firs message', message: 'this is the first message', author: 'John'}]
+            messages: [{title: 'firs message', message: 'this is the first message', author: 'John'}],
+            isUserLoggedIn: false 
         }
     }
 
     componentDidMount() {
-        console.log('component mounted')
         fetch("http://localhost:8080/api/messages")
         .then(res => res.json())
         .then(
             (result) => {
+                console.log(result)
                 this.setState((state, props) => ({
                     isLoaded: true,
-                    messages: state.messages.concat(result)
-                }));
+                    messages: state.messages.concat(result.messages),
+                    isUserLoggedIn: result.isUserLoggedIn
+                }))
             },
             // Note: it's important to handle errors here
             // instead of a catch() block so that we don't swallow
