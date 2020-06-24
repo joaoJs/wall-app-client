@@ -2,14 +2,17 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import '../styles/forms.css'
 import $ from 'jquery' 
+import {encryptPassword} from '../utils/password'
 
 function LoginPage() {
 
     const { register, errors, handleSubmit } = useForm()
     const onSubmit = data => {
+      const cipher = encryptPassword(data.password, data.email)
+      data.password = cipher
       $.ajax({
-        type: "GET",
-        url: `http://localhost:8080/api/users/${data.email}`,
+        type: "POST",
+        url: `http://localhost:8080/api/users/login`,
         data: data,
         success: function(res) {
             console.log('joão')

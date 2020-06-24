@@ -2,6 +2,7 @@ import React, {useRef} from 'react'
 import { useForm } from 'react-hook-form'
 import '../styles/forms.css'
 import $ from 'jquery'
+import {encryptPassword} from '../utils/password'
 
 function SignUpPage() {
 
@@ -9,15 +10,18 @@ function SignUpPage() {
     const password = useRef({});
     password.current = watch("password", "");
     const onSubmit = data => {
-        $.ajax({
-            type: "POST",
-            url: "http://localhost:8080/api/users",
-            data: data,
-            success: function(res) {
-                console.log('joão')
-                console.log(res)
-            }
-          });
+      // encrypton using CryptoJS library
+      const cipher = encryptPassword(data.password, data.email)
+      data.password = cipher
+      data.password_repeat = null
+      $.ajax({
+          type: "POST",
+          url: "http://localhost:8080/api/users",
+          data: data,
+          success: function(res) {
+              console.log(res)
+          }
+        });
     }
 
     return (
