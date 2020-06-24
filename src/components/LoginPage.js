@@ -1,11 +1,21 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import '../styles/forms.css'
+import $ from 'jquery' 
 
 function LoginPage() {
 
     const { register, errors, handleSubmit } = useForm()
     const onSubmit = data => {
+      $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/users/${data.email}`,
+        data: data,
+        success: function(res) {
+            console.log('joão')
+            console.log(res)
+        }
+      });
         alert(JSON.stringify(data))
     }
 
@@ -30,17 +40,20 @@ function LoginPage() {
             {errors.email && errors.email.message}
             <br />
 
-            <label htmlFor="name">Password</label>
+            <label>Password</label>
             <input
-              name="password"
-              placeholder="1234"
-              autoComplete="on"
-              ref={register({
-                required: 'this is required'
-              })}
+                name="password"
+                type="password"
+                ref={register({
+                required: "You must specify a password",
+                minLength: {
+                    value: 8,
+                    message: "Password must have at least 8 characters"
+                }
+                })}
             />
             <br />
-            {errors.password && errors.password.message}
+            {errors.password && <p className="error">{errors.password.message}</p>}
             <br />
             <button type="submit">Submit</button>
           </form>
