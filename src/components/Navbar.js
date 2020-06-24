@@ -12,6 +12,7 @@ function Navbar() {
             { isLoggedIn ?
             <div className="navBar">
                 <Link to="/logout">Logout </Link>
+                <Link to="/wall">Wall </Link>
             </div>
             :
             <div className="navBar">

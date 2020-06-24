@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Message from './Message'
 import '../styles/wall.css'
+import SessionContext from '../constants/context'
 
 class Wall extends React.Component {
     constructor() {
@@ -9,11 +10,14 @@ class Wall extends React.Component {
             error: null,
             isLoaded: false,
             messages: [{title: 'firs message', message: 'this is the first message', author: 'John'}],
-            isUserLoggedIn: false 
         }
     }
 
+    static contextType = SessionContext
+
     componentDidMount() {
+        const session = this.context
+        console.log(session)
         fetch("http://localhost:8080/api/messages")
         .then(res => res.json())
         .then(
@@ -21,8 +25,7 @@ class Wall extends React.Component {
                 console.log(result)
                 this.setState((state, props) => ({
                     isLoaded: true,
-                    messages: state.messages.concat(result.messages),
-                    isUserLoggedIn: result.isUserLoggedIn
+                    messages: state.messages.concat(result)
                 }))
             },
             // Note: it's important to handle errors here
@@ -38,6 +41,7 @@ class Wall extends React.Component {
     }
 
     render() {
+        const { session } = this.context
         return (
             <div>
                 <h2>Bellow are the messages</h2>
@@ -46,6 +50,7 @@ class Wall extends React.Component {
                         <Message content={message} key={i}/>
                     )}
                 </ul>
+                {session.isLoggedIn && <button>Add new message</button>}
             </div>
         )
     }
