@@ -18,7 +18,7 @@ class Wall extends React.Component {
     componentDidMount() {
         const session = this.context
         console.log(session)
-        fetch("http://localhost:8080/api/messages")
+        fetch("https://wall-app-joao.herokuapp.com/api/messages")
         .then(res => res.json())
         .then(
             (result) => {

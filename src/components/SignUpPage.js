@@ -16,7 +16,7 @@ function SignUpPage() {
       data.password_repeat = null
       $.ajax({
           type: "POST",
-          url: "http://localhost:8080/api/users",
+          url: "https://wall-app-joao.herokuapp.com/api/users/",
           data: data,
           success: function(res) {
               console.log(res)

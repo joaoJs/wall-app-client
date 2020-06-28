@@ -14,7 +14,7 @@ function LoginPage() {
       data.password = cipher
       $.ajax({
         type: "POST",
-        url: `http://localhost:8080/api/users/login`,
+        url: `https://wall-app-joao.herokuapp.com/api/users/login`,
         data: data,
         success: function(res) {
             const newSession = {isLoggedIn: true}
