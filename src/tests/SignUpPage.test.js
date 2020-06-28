@@ -8,9 +8,9 @@ global.MutationObserver = window.MutationObserver
 
 describe('SignUpPage', () => {
     it('should render SignUpPage Component', () => {
-      render(<SignUpPage />)
+        render(<SignUpPage />)
 
-      screen.debug()
+        screen.debug()
     })
 
     it('should render SignUpPage Component with "Name" in it', () => {
@@ -27,4 +27,4 @@ describe('SignUpPage', () => {
         const errorMessage = await findByText('Must enter a name')
         expect(errorMessage).toBeInTheDocument()
     })
-  })
+})
